@@ -1,9 +1,9 @@
 var Quill = require('lever-quill');
 var Range = Quill.require('range');
+sanitizeHTML = require('lever-caja').allowAllUrls;
 
 function DerbyQuill() {}
 module.exports = DerbyQuill;
-
 
 DerbyQuill.Quill = Quill;
 DerbyQuill.Range = Range;
@@ -205,6 +205,7 @@ DerbyQuill.prototype.focus = function() {
 };
 
 DerbyQuill.prototype.setHTML = function(html) {
+  html = sanitizeHTML(html)
   return this.quill.setHTML(html);
 };
 

@@ -1,9 +1,9 @@
 var Quill = require('lever-quill');
 var Range = Quill.require('range');
-var dom = Quill.require('dom');
 
-module.exports = DerbyQuill;
 function DerbyQuill() {}
+module.exports = DerbyQuill;
+
 
 DerbyQuill.Quill = Quill;
 DerbyQuill.Range = Range;
@@ -208,6 +208,6 @@ DerbyQuill.prototype.setHTML = function(html) {
   return this.quill.setHTML(html);
 };
 
-deepCopy = function(obj) {
+function deepCopy(obj) {
   return JSON.parse(JSON.stringify(obj));
 };

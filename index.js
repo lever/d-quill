@@ -1,8 +1,6 @@
 var sanitizeHTML = require('lever-caja').allowAllUrls;
 var Quill = require('lever-quill');
 var Range = Quill.require('range');
-var Document = Quill.require('document');
-var Delta = Quill.require('delta');
 
 function DerbyQuill() {}
 module.exports = DerbyQuill;

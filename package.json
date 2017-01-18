@@ -1,7 +1,7 @@
 {
   "name": "l-quill",
   "description": "Derby rich text editor component based on Quill. Forked from derbyjs/d-quill.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "registry": "https://npm.lever.co/"
   },

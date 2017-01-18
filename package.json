@@ -1,7 +1,10 @@
 {
-  "name": "d-quill",
-  "description": "Derby rich text editor component based on Quill",
-  "version": "0.0.3",
+  "name": "l-quill",
+  "description": "Derby rich text editor component based on Quill. Forked from derbyjs/d-quill.",
+  "version": "1.0.0",
+  "publishConfig": {
+    "registry": "https://npm.lever.co/"
+  },
   "main": "index.js",
   "keywords": [
     "derby",
@@ -11,14 +14,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/codeparty/d-quill.git"
+    "url": "git://github.com/lever/l-quill.git"
   },
   "bugs": {
-    "url": "https://github.com/codeparty/d-quill/issues"
+    "url": "https://github.com/lever/l-quill/issues"
   },
   "author": "Nate Smith",
   "license": "MIT",
   "dependencies": {
+    "lever-caja": "^3.1.0",
     "lever-quill": "^1.1.0"
   },
   "devDependencies": {}

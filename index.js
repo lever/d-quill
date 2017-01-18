@@ -1,9 +1,9 @@
+var sanitizeHTML = require('lever-caja').allowAllUrls;
 var Quill = require('lever-quill');
 var Range = Quill.require('range');
-var dom = Quill.require('dom');
 
-module.exports = DerbyQuill;
 function DerbyQuill() {}
+module.exports = DerbyQuill;
 
 DerbyQuill.Quill = Quill;
 DerbyQuill.Range = Range;
@@ -33,12 +33,26 @@ DerbyQuill.prototype.create = function() {
     quillOptions.formats = this.model.get('allowedFormats');
   }
 
+  // If onPaste is defined, hook into the PasteManager
+  // module. This provides a point at which we can
+  // modify the resulting Delta before it is applied
+  // to the editor.
+  if (this.onPaste) {
+    quillOptions.modules = {'paste-manager': {
+      onConvert: function(pasteContent) {
+        var delta = self.pasteManager._onConvert(pasteContent)
+        return self.onPaste(delta, pasteContent)
+      }
+    }}
+  }
+
   var quill = this.quill = new Quill(this.editor, quillOptions);
   quill.addModule('toolbar', {
     container: window.document.createElement('div'),
   });
   this.toolbar = quill.modules['toolbar'];
   this.keyboard = quill.modules['keyboard'];
+  this.pasteManager = quill.modules['paste-manager']
   if (this.model.get('focus')) this.focus();
 
   // Fix how keyboard hotkeys affect toolbar buttons
@@ -205,9 +219,10 @@ DerbyQuill.prototype.focus = function() {
 };
 
 DerbyQuill.prototype.setHTML = function(html) {
+  html = sanitizeHTML(html)
   return this.quill.setHTML(html);
 };
 
-deepCopy = function(obj) {
+function deepCopy(obj) {
   return JSON.parse(JSON.stringify(obj));
 };
